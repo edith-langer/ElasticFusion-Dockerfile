@@ -1,3 +1,7 @@
+xhost local:docker
+nvidia-docker run -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=${DISPLAY} --env QT_X11_NO_MITSHM=1 --network=host -v /usr/lib/nvidia-450:/usr/lib/nvidia-450 -v /usr/lib32/nvidia-450:/usr/lib32/nvidia-450 -v /home/edith/:/home/root/workspace --privileged --name my_EF_container my_elasticfusion
+
+
 # ElasticFusion Dockerfile
 Dockerfile for use of [ElasticFusion](https://github.com/mp3guy/ElasticFusion)
 

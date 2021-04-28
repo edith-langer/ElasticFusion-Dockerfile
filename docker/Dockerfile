@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libusb-1.0-0-dev \
     libxkbcommon-x11-dev \
     openjdk-8-jdk \
+    wget\
     zlib1g-dev \
  && rm -rf /var/lib/apt/lists/*
 
@@ -41,14 +42,15 @@ RUN git clone https://github.com/occipital/OpenNI2.git \
 RUN ln -sf /usr/include/eigen3/Eigen /usr/include/Eigen \
  && ln -sf /usr/include/eigen3/unsupported /usr/include/unsupported
 
-RUN git clone https://github.com/Daichou/ElasticFusion.git \
+#RUN git clone https://github.com/Daichou/ElasticFusion.git \
+RUN git clone https://github.com/edith-langer/ElasticFusion.git \
  && cd ElasticFusion/Core \
  && mkdir build && cd build \
  && cmake ../src \
  && make -j8 \
  && cd ../../GUI \
  && mkdir build && cd build \
- && cmake -DWITH_REALSENSE=ON ../src \
+ && cmake -DWITH_REALSENSE=OFF ../src \
  && make -j8
 
 ENV PATH $PATH:/opt/ElasticFusion/GUI/build/
