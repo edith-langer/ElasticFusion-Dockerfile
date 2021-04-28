@@ -1,9 +1,9 @@
 ARG CUDA_VERSION=10.2
-FROM nvidia/cudagl:${CUDA_VERSION}-devel-ubuntu18.04
+FROM nvidia/cudagl:$CUDA_VERSION-devel-ubuntu18.04
 LABEL maintainer "yuma.hiramatsu <yuma.hiramatsu@gmail.com>"
 
 RUN apt-key adv --keyserver keys.gnupg.net --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE \
- || apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
+   || apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
 RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common \
  && add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo bionic main" -u \
@@ -30,17 +30,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /opt
 
 RUN git clone https://github.com/stevenlovegrove/Pangolin.git \
- && cd Pangolin \
- && mkdir build && cd build \
- && cmake .. -DAVFORMAT_INCLUDE_DIR="" \
- && cmake --build .
+   && cd Pangolin \
+   && mkdir build && cd build \
+   && cmake .. -DAVFORMAT_INCLUDE_DIR="" \
+   && cmake --build .
 
 RUN git clone https://github.com/occipital/OpenNI2.git \
- && cd OpenNI2 \
- && make -j8
+   && cd OpenNI2 \
+   && make -j8
 
 RUN ln -sf /usr/include/eigen3/Eigen /usr/include/Eigen \
- && ln -sf /usr/include/eigen3/unsupported /usr/include/unsupported
+   && ln -sf /usr/include/eigen3/unsupported /usr/include/unsupported
 
 #RUN git clone https://github.com/Daichou/ElasticFusion.git \
 RUN git clone https://github.com/edith-langer/ElasticFusion.git \
@@ -52,6 +52,7 @@ RUN git clone https://github.com/edith-langer/ElasticFusion.git \
  && mkdir build && cd build \
  && cmake -DWITH_REALSENSE=OFF ../src \
  && make -j8
+
 
 ENV PATH $PATH:/opt/ElasticFusion/GUI/build/
 
